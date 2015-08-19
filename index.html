@@ -9,12 +9,29 @@
     <script src="lodash.min.js"></script>
     <script src="calque.js"></script>
     <script>
+		function getInput(){
+			return document.getElementById('input');
+		}
+	
         window.onload = function () {
-            var input = document.getElementById('input');
+            var input = getInput();
             var output = document.getElementById('output');
+			
+			try {
+				var value = localStorage.getItem('area');
+				input.value = value;			
+			} catch (e) {}
+			
             window.calque = new Calque(input, output);
-            input.select();
+            input.focus();
         }
+		
+		window.onunload = function () {
+		    var input = getInput();
+			try {
+				localStorage.setItem('area', input.value);
+			} catch (e) {}
+		}
     </script>
 </head>
 <body>
@@ -53,7 +70,7 @@
         <hr>
 
         <p>Using <a target="blank" href="https://github.com/josdejong/mathjs">math.js</a>.</p>
-        <p>View on <a target="blank" href="https://github.com/grimalschi/calque">GitHub</a>.</p>
+        <p>View on <a target="blank" href="https://github.com/garipov/calque">GitHub</a>.</p>
     </div>
 </body>
 </html>
